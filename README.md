@@ -33,3 +33,39 @@ while ibm_db.fetch_row(stmt):
 
 # Close the connection
 ibm_db.close(conn)
+CREATE DATABASE MYDB;
+
+-- Connect to the new database
+CONNECT TO MYDB;
+
+-- Create a new table
+CREATE TABLE Employee (
+    EmployeeID INT,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Department VARCHAR(50)
+);
+
+-- Insert data into the Employee table
+INSERT INTO Employee (EmployeeID, FirstName, LastName, Department)
+VALUES
+    (1, 'John', 'Doe', 'HR'),
+    (2, 'Alice', 'Smith', 'Marketing'),
+    (3, 'Bob', 'Johnson', 'Finance');
+
+-- Retrieve data from the Employee table
+SELECT * FROM Employee;
+
+-- Update data
+UPDATE Employee
+SET Department = 'Sales'
+WHERE EmployeeID = 1;
+
+-- Delete data
+DELETE FROM Employee WHERE EmployeeID = 3;
+
+-- Disconnect from the database
+DISCONNECT;
+
+-- Drop the database (be cautious with this command)
+DROP DATABASE MYDBS;

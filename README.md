@@ -69,3 +69,15 @@ DISCONNECT;
 
 -- Drop the database (be cautious with this command)
 DROP DATABASE MYDBS;
+import pandas as pd
+import psycopg2
+
+# Extract data from a database
+connection = psycopg2.connect(database="mydb")
+data = pd.read_sql("SELECT * FROM Sales", connection)
+
+# Transform data
+data['TotalAmount'] = data['Quantity'] * data['Price']
+
+# Load data into another database
+data.to_sql("SalesSummary", connection, if_exists='replace')
